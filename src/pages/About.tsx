@@ -5,7 +5,7 @@ const About: React.FunctionComponent = () => {
   const history = useHistory();
   return (
     <React.Fragment>
-      <h1>About us page</h1>
+      <h1>About page</h1>
       <p>Hello.</p>
       <p>
         This application was developed for educational purposes. However, it can
