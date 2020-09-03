@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 import Navbar from "./components/NavBar";
 import TodoForm from "./components/toDoForm";
@@ -8,11 +8,18 @@ import { ITodo } from "./Todo.inteface";
 const App: React.FunctionComponent = () => {
   const [todos, setTodos] = useState<ITodo[]>([]);
 
+  useEffect(() => {
+    const saved = JSON.parse(localStorage.getItem("todos") || "[]") as ITodo[];
+    setTodos(saved);
+  }, []);
+  useEffect(() => {
+    localStorage.setItem("todos", JSON.stringify(todos));
+  }, [todos]);
   const addTodo = (title: string) => {
     const newTodo: ITodo = {
       title,
       id: todos.length + 1,
-      completed: true,
+      completed: false,
     };
     setTodos((todos) => [newTodo, ...todos]);
   };
@@ -30,7 +37,10 @@ const App: React.FunctionComponent = () => {
     );
   };
   const removeTodo = (id: number) => {
-    setTodos((prev) => prev.filter((todo) => todo.id !== id));
+    const shouldRemove = global.confirm(
+      "Are you sure want to delete this item?"
+    );
+    if (shouldRemove) setTodos((prev) => prev.filter((todo) => todo.id !== id));
   };
 
   return (
