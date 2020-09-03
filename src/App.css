@@ -5,6 +5,9 @@
 .margins2RemTop {
   margin-top: 2rem;
 }
+.margins2RemLeft {
+  margin-left: 2rem;
+}
 
 .todo {
   margin-bottom: 1rem;
@@ -26,4 +29,8 @@
 
 .todo i {
   z-index: 2;
+}
+
+.one__line {
+  display: flex;
 }
